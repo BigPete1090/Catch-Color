@@ -1,0 +1,3 @@
+rootProject.name = "CatchColor"
+include ':app'
+include ':backend'
