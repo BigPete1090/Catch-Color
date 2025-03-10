@@ -1,0 +1,24 @@
+Index: catchcolor/app/build/generated/source/buildConfig/debug/com/example/colorscanner/BuildConfig.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/catchcolor/app/build/generated/source/buildConfig/debug/com/example/colorscanner/BuildConfig.java b/catchcolor/app/build/generated/source/buildConfig/debug/com/example/colorscanner/BuildConfig.java
+deleted file mode 100644
+--- a/catchcolor/app/build/generated/source/buildConfig/debug/com/example/colorscanner/BuildConfig.java	
++++ /dev/null	
+@@ -1,12 +0,0 @@
+-/**
+- * Automatically generated file. DO NOT MODIFY
+- */
+-package com.example.colorscanner;
+-
+-public final class BuildConfig {
+-  public static final boolean DEBUG = Boolean.parseBoolean("true");
+-  public static final String APPLICATION_ID = "com.example.colorscanner";
+-  public static final String BUILD_TYPE = "debug";
+-  public static final int VERSION_CODE = 1;
+-  public static final String VERSION_NAME = "1.0";
+-}
+diff --git a/catchcolor/backend/build/generated/source/buildConfig/debug/com/example/colorscanner/backend/BuildConfig.java b/catchcolor/backend/build/generated/source/buildConfig/debug/com/example/colorscanner/backend/BuildConfig.java
+deleted file mode 100644

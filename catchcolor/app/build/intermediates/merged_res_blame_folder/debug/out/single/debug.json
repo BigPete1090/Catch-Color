@@ -1,0 +1,98 @@
+[
+    {
+        "merged": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-merged_res-38:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-main-40:\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-merged_res-38:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-main-40:\\mipmap-xhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-merged_res-38:\\layout_activity_home.xml.flat",
+        "source": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-main-40:\\layout\\activity_home.xml"
+    },
+    {
+        "merged": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-merged_res-38:\\drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-pngs-34:\\drawable-anydpi-v24\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-merged_res-38:\\mipmap-mdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-main-40:\\mipmap-mdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-merged_res-38:\\mipmap-hdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-main-40:\\mipmap-hdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-merged_res-38:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-main-40:\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-merged_res-38:\\layout_activity_camera.xml.flat",
+        "source": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-main-40:\\layout\\activity_camera.xml"
+    },
+    {
+        "merged": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-merged_res-38:\\mipmap-xhdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-main-40:\\mipmap-xhdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-merged_res-38:\\layout_activity_image_color_analyzer.xml.flat",
+        "source": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-main-40:\\layout\\activity_image_color_analyzer.xml"
+    },
+    {
+        "merged": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-merged_res-38:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-main-40:\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-merged_res-38:\\mipmap-xxxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-main-40:\\mipmap-xxxhdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.example.colorscanner.app-merged_res-38:/layout_activity_main.xml.flat",
+        "source": "com.example.colorscanner.app-main-40:/layout/activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-merged_res-38:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-main-40:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-merged_res-38:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-main-40:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-merged_res-38:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-main-40:\\mipmap-xxxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-merged_res-38:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-main-40:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-merged_res-38:\\layout_activity_upload.xml.flat",
+        "source": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-main-40:\\layout\\activity_upload.xml"
+    },
+    {
+        "merged": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-merged_res-38:\\mipmap-xxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-main-40:\\mipmap-xxhdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-merged_res-38:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-main-40:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-merged_res-38:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-main-40:\\mipmap-xhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-merged_res-38:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-main-40:\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-merged_res-38:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-main-40:\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-merged_res-38:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Peter Tenholder\\.gradle\\daemon\\8.11.1\\com.example.colorscanner.app-main-40:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    }
+]
