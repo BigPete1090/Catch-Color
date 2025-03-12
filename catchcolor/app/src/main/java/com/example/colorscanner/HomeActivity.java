@@ -16,16 +16,13 @@ public class HomeActivity extends AppCompatActivity {
         Button cameraButton = findViewById(R.id.camera_button);
         Button galleryButton = findViewById(R.id.gallery_button);
 
-        // Set click listener for "Take Image" button
         cameraButton.setOnClickListener(v -> {
-            // Launch MainActivity which has the camera functionality
             Intent intent = new Intent(HomeActivity.this, MainActivity.class);
             startActivity(intent);
         });
 
-        // Set click listener for "Upload Photo" button
         galleryButton.setOnClickListener(v -> {
-            // Launch upload activity
+            // wait check if this works still sai
             Intent intent = new Intent(HomeActivity.this, UploadActivity.class);
             startActivity(intent);
         });
