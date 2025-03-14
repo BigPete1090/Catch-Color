@@ -4,7 +4,7 @@
             "outputFile": "com.example.colorscanner.app-mergeDebugResources-36:/values-small-v4/values-small-v4.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Peter Tenholder\\.gradle\\caches\\8.11.1\\transforms\\d5e0f7176f3576f7b2a9e2fe7ef29084\\transformed\\material-1.12.0\\res\\values-small-v4\\values-small-v4.xml",
+                    "source": "C:\\Users\\PeterTenholder\\.gradle\\caches\\8.11.1\\transforms\\8c5595da007b5f1c3fd5263309f7e011\\transformed\\material-1.12.0\\res\\values-small-v4\\values-small-v4.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
