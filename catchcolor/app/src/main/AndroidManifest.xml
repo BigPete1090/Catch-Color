@@ -5,6 +5,7 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- Add this for opening URLs -->
 
     <application
         android:allowBackup="true"
@@ -25,5 +26,6 @@
 
         <activity android:name=".MainActivity" />
         <activity android:name=".UploadActivity" />
+        <activity android:name=".ResourcesActivity" /> <!-- Add this line -->
     </application>
 </manifest>

@@ -624,8 +624,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Check for grayscale colors first
         if (saturation < 0.15) {
-            if (value < 0.15) return "Black";
-            if (value > 0.9) return "White";
+            if (value < 0.15) return "Black (Negro)";
+            if (value > 0.9) return "White (Blanco)";
             if (value < 0.3) return "Dark Gray";
             if (value > 0.7) return "Light Gray";
             return "Gray";

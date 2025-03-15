@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Catch Color</string>
+    <string name="resources">Resources</string>
+    <string name="back">Back</string>
+    <string name="website_preview">Website Preview</string>
 </resources>

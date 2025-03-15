@@ -15,6 +15,7 @@ public class HomeActivity extends AppCompatActivity {
 
         Button cameraButton = findViewById(R.id.camera_button);
         Button galleryButton = findViewById(R.id.gallery_button);
+        Button resourcesButton = findViewById(R.id.resources_button);
 
         // Set click listener for "Take Image" button
         cameraButton.setOnClickListener(v -> {
@@ -27,6 +28,13 @@ public class HomeActivity extends AppCompatActivity {
         galleryButton.setOnClickListener(v -> {
             // Launch upload activity
             Intent intent = new Intent(HomeActivity.this, UploadActivity.class);
+            startActivity(intent);
+        });
+
+        // Set click listener for "Resources" button
+        resourcesButton.setOnClickListener(v -> {
+            // Launch resources activity
+            Intent intent = new Intent(HomeActivity.this, ResourcesActivity.class);
             startActivity(intent);
         });
     }
