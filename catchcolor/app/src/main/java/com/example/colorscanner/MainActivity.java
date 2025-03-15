@@ -1,5 +1,4 @@
 package com.example.colorscanner;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -21,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,20 +35,16 @@ import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
-
 import com.google.common.util.concurrent.ListenableFuture;
-
 import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private static final int REQUEST_CODE_PERMISSIONS = 10;
     private static final String[] REQUIRED_PERMISSIONS = new String[]{Manifest.permission.CAMERA};
-
     private PreviewView previewView;
     private TextView colorHexText;
     private TextView colorNameText;
@@ -61,13 +55,9 @@ public class MainActivity extends AppCompatActivity {
     private FrameLayout previewContainer;
     private BoxOverlayView boxOverlayView;
     private final Executor executor = Executors.newSingleThreadExecutor();
-
-    // Image preview related components
     private ImageView capturedImageView;
     private Bitmap capturedBitmap;
     private View previewOverlay;
-
-    // Zoom-related properties
     private Camera camera;
     private float currentZoomRatio = 1.0f;
     private SeekBar zoomSeekBar;
@@ -75,16 +65,12 @@ public class MainActivity extends AppCompatActivity {
     private Button zoomInButton;
     private Button zoomOutButton;
     private ScaleGestureDetector scaleGestureDetector;
-
-    // Capture state tracking
     private boolean inPreviewMode = false;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialize views
         previewView = findViewById(R.id.preview_view);
         colorHexText = findViewById(R.id.color_hex);
         colorNameText = findViewById(R.id.color_name);
@@ -92,35 +78,25 @@ public class MainActivity extends AppCompatActivity {
         captureButton = findViewById(R.id.capture_button);
         previewContainer = findViewById(R.id.preview_container);
 
-        // Initialize image preview related views
         capturedImageView = findViewById(R.id.captured_image_view);
         previewOverlay = findViewById(R.id.preview_overlay);
 
-        // Initialize back button
         backButton = findViewById(R.id.back_button);
         if (backButton != null) {
             backButton.setOnClickListener(v -> {
-                // Go back to home activity
                 finish();
             });
         } else {
             Log.e(TAG, "Back button not found in layout");
         }
-
-        // Initialize zoom UI elements
         zoomSeekBar = findViewById(R.id.zoom_seek_bar);
         zoomLevelText = findViewById(R.id.zoom_level_text);
         zoomInButton = findViewById(R.id.zoom_in_button);
         zoomOutButton = findViewById(R.id.zoom_out_button);
-
-        // Create and add box overlay
         boxOverlayView = new BoxOverlayView(this);
         previewContainer.addView(boxOverlayView);
-
-        // Set up touch listener for captured image
         setupCapturedImageTouchListener();
 
-        // Initialize zoom gesture detector
         scaleGestureDetector = new ScaleGestureDetector(this, new ScaleGestureDetector.SimpleOnScaleGestureListener() {
             @Override
             public boolean onScale(ScaleGestureDetector detector) {
@@ -130,16 +106,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Set up zoom touch listener
         previewView.setOnTouchListener((v, event) -> {
             scaleGestureDetector.onTouchEvent(event);
             return true;
         });
-
-        // Set up zoom UI controls
         setupZoomControls();
-
-        // Check for camera permissions
         if (allPermissionsGranted()) {
             Log.d(TAG, "All permissions are granted, starting camera");
             startCamera();
@@ -147,65 +118,43 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "Requesting camera permissions");
             requestCameraPermission();
         }
-
-        // Set up capture button listener
         captureButton.setOnClickListener(v -> {
             if (inPreviewMode) {
-                // We're already in preview mode, so reset to camera mode
                 resetToCamera();
             } else {
-                // We're in camera mode, so capture an image
                 captureImage();
             }
         });
     }
 
     private void resetToCamera() {
-        // Hide the captured image and overlay
+        // Check this part
         capturedImageView.setVisibility(View.GONE);
         previewOverlay.setVisibility(View.GONE);
-
-        // Reset the button text
         captureButton.setText("Capture Color");
-
-        // Update state tracking
         inPreviewMode = false;
-
-        // Make sure camera controls are visible again
         findViewById(R.id.zoom_controls).setVisibility(View.VISIBLE);
         boxOverlayView.setVisibility(View.VISIBLE);
 
         Log.d(TAG, "Reset to camera mode for next capture");
     }
-
     private void setupCapturedImageTouchListener() {
         capturedImageView.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_MOVE) {
                 if (capturedBitmap != null) {
-                    // Get touch coordinates relative to the image view
                     float x = event.getX();
                     float y = event.getY();
-
-                    // Convert touch coordinates to bitmap coordinates
                     int bitmapX = (int) (x * capturedBitmap.getWidth() / v.getWidth());
                     int bitmapY = (int) (y * capturedBitmap.getHeight() / v.getHeight());
-
-                    // Ensure coordinates are within bounds
                     if (bitmapX >= 0 && bitmapX < capturedBitmap.getWidth() &&
                             bitmapY >= 0 && bitmapY < capturedBitmap.getHeight()) {
-
-                        // Get color at touch point
                         int pixel = capturedBitmap.getPixel(bitmapX, bitmapY);
                         int r = Color.red(pixel);
                         int g = Color.green(pixel);
                         int b = Color.blue(pixel);
-
-                        // Create color info object
                         String hex = String.format("#%06X", (0xFFFFFF & pixel));
                         String name = getColorName(pixel);
                         ColorInfo touchedColor = new ColorInfo(hex, name, r, g, b);
-
-                        // Update UI with the color
                         colorHexText.setText(touchedColor.getHex());
                         colorNameText.setText(touchedColor.getName());
                         colorPreview.setBackgroundColor(Color.parseColor(touchedColor.getHex()));
@@ -220,12 +169,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupZoomControls() {
-        // Configure zoom seekbar
         zoomSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (fromUser && camera != null) {
-                    // Convert progress (0-100) to zoom ratio (1.0 to max zoom)
                     float maxZoom = getMaxZoomRatio();
                     float zoomRatio = 1.0f + ((maxZoom - 1.0f) * progress / 100.0f);
                     camera.getCameraControl().setZoomRatio(zoomRatio);
@@ -234,16 +181,13 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                // Not needed
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                // Not needed
             }
         });
 
-        // Configure zoom buttons
         zoomInButton.setOnClickListener(v -> {
             if (camera != null) {
                 float step = (getMaxZoomRatio() - 1.0f) / 10.0f;
@@ -262,32 +206,28 @@ public class MainActivity extends AppCompatActivity {
     private void updateZoom(float zoomRatio) {
         if (camera == null) return;
 
-        // Ensure zoom ratio is within valid range
         float maxZoom = getMaxZoomRatio();
         float minZoom = 1.0f;
         zoomRatio = Math.max(minZoom, Math.min(maxZoom, zoomRatio));
 
-        // Update camera zoom
         camera.getCameraControl().setZoomRatio(zoomRatio);
 
         Log.d(TAG, "Zoom updated to: " + zoomRatio + "x");
     }
 
     private float getMaxZoomRatio() {
-        if (camera == null) return 3.0f; // Default fallback value
+        if (camera == null) return 3.0f; 
 
         ZoomState zoomState = camera.getCameraInfo().getZoomState().getValue();
         if (zoomState != null) {
             return zoomState.getMaxZoomRatio();
         }
-        return 3.0f; // Default fallback value
+        return 3.0f; 
     }
 
     private void requestCameraPermission() {
-        // Check if we should show the rationale for requesting camera permission
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
             Log.d(TAG, "Showing permission rationale dialog");
-            // Show an explanation to the user
             new AlertDialog.Builder(this)
                     .setTitle("Camera Permission Required")
                     .setMessage("This app needs camera access to detect colors. Please grant the camera permission.")
@@ -306,7 +246,6 @@ public class MainActivity extends AppCompatActivity {
                     .create()
                     .show();
         } else {
-            // No explanation needed, request the permission directly
             Log.d(TAG, "Requesting permission directly");
             ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
         }
@@ -318,31 +257,22 @@ public class MainActivity extends AppCompatActivity {
         cameraProviderFuture.addListener(() -> {
             try {
                 ProcessCameraProvider cameraProvider = cameraProviderFuture.get();
-
-                // Build the preview use case
                 Preview preview = new Preview.Builder().build();
                 preview.setSurfaceProvider(previewView.getSurfaceProvider());
 
-                // Configure image capture with high resolution
                 imageCapture = new ImageCapture.Builder()
                         .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
                         .build();
 
-                // Select back camera as a default
                 CameraSelector cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA;
-
-                // Unbind any bound use cases before rebinding
                 cameraProvider.unbindAll();
 
-                // Bind camera to lifecycle and get Camera instance for zoom control
                 camera = cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture);
 
-                // Initialize zoom controls after camera is bound
                 initializeZoomControls();
 
                 Log.d(TAG, "Camera started successfully");
 
-                // Check if the camera supports zoom
                 if (camera.getCameraInfo().getZoomState().getValue() != null) {
                     float maxZoom = camera.getCameraInfo().getZoomState().getValue().getMaxZoomRatio();
                     Log.d(TAG, "Camera max zoom: " + maxZoom);
@@ -360,19 +290,15 @@ public class MainActivity extends AppCompatActivity {
     private void initializeZoomControls() {
         if (camera == null) return;
 
-        // Observe zoom state changes
         camera.getCameraInfo().getZoomState().observe(this, new Observer<ZoomState>() {
             @Override
             public void onChanged(ZoomState zoomState) {
                 if (zoomState != null) {
-                    // Update current zoom ratio when the camera's zoom state changes
                     currentZoomRatio = zoomState.getZoomRatio();
 
-                    // Update zoom text
                     runOnUiThread(() -> {
                         zoomLevelText.setText(String.format("%.1fx", currentZoomRatio));
 
-                        // Update seek bar position
                         float maxZoom = zoomState.getMaxZoomRatio();
                         int progress = Math.round((currentZoomRatio - 1.0f) / (maxZoom - 1.0f) * 100);
                         zoomSeekBar.setProgress(progress);
@@ -407,24 +333,19 @@ public class MainActivity extends AppCompatActivity {
 
                         Log.d(TAG, "Bitmap created successfully: " + bitmap.getWidth() + "x" + bitmap.getHeight());
 
-                        // Store the bitmap for touch interaction
                         capturedBitmap = bitmap;
 
-                        // Display the captured image
                         capturedImageView.setImageBitmap(bitmap);
                         capturedImageView.setVisibility(View.VISIBLE);
 
-                        // Show the preview overlay with instructions
                         if (previewOverlay != null) {
                             previewOverlay.setVisibility(View.VISIBLE);
                         }
 
-                        // Get the coordinates of the box relative to the bitmap
                         Log.d(TAG, "Getting scaled box rectangle");
                         Rect boxRect = getScaledBoxRect(bitmap.getWidth(), bitmap.getHeight());
                         Log.d(TAG, "Box rectangle: " + boxRect.toString());
 
-                        // Extract and process only the pixels inside the box
                         Log.d(TAG, "Extracting average color from box");
                         ColorInfo averageColor = extractAverageColorFromBox(bitmap, boxRect);
 
@@ -432,19 +353,15 @@ public class MainActivity extends AppCompatActivity {
                         colorNameText.setText(averageColor.getName());
                         colorPreview.setBackgroundColor(Color.parseColor(averageColor.getHex()));
 
-                        // Update button text to indicate next action
                         captureButton.setText("Take Next Picture");
 
-                        // Hide the box overlay and zoom controls during preview
                         boxOverlayView.setVisibility(View.GONE);
                         findViewById(R.id.zoom_controls).setVisibility(View.GONE);
 
-                        // Update state tracking
                         inPreviewMode = true;
 
                         Log.d(TAG, "Detected color: " + averageColor.getName() + " (" + averageColor.getHex() + ")");
 
-                        // Show toast with instruction for touch
                         Toast.makeText(MainActivity.this,
                                 "Touch the image to pick specific colors",
                                 Toast.LENGTH_LONG).show();
@@ -470,14 +387,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private Rect getScaledBoxRect(int bitmapWidth, int bitmapHeight) {
-        // Get the box coordinates relative to the preview
         Rect boxRect = boxOverlayView.getBoxRect();
 
-        // Calculate scaling factors
         float scaleX = (float) bitmapWidth / previewView.getWidth();
         float scaleY = (float) bitmapHeight / previewView.getHeight();
 
-        // Scale the box coordinates to match the bitmap dimensions
         return new Rect(
                 (int) (boxRect.left * scaleX),
                 (int) (boxRect.top * scaleY),
@@ -488,23 +402,20 @@ public class MainActivity extends AppCompatActivity {
 
     private Bitmap imageToBitmap(ImageProxy image) {
         try {
-            // First try to get bitmap directly from the preview view
             Bitmap bitmap = previewView.getBitmap();
             if (bitmap != null) {
                 return bitmap;
             }
 
-            // If that fails, try to convert from image buffer
             ByteBuffer buffer = image.getPlanes()[0].getBuffer();
             byte[] bytes = new byte[buffer.capacity()];
             buffer.get(bytes);
 
-            // For JPEG format images
+            // use jpegs prolly
             if (image.getFormat() == ImageFormat.JPEG) {
                 return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
             }
 
-            // For YUV format (common in camera preview)
             if (image.getFormat() == ImageFormat.YUV_420_888) {
                 YuvImage yuvImage = new YuvImage(
                         bytes,
@@ -534,7 +445,6 @@ public class MainActivity extends AppCompatActivity {
 
     private ColorInfo extractAverageColorFromBox(Bitmap bitmap, Rect boxRect) {
         try {
-            // Ensure the box is within the bitmap boundaries
             Rect safeRect = new Rect(
                     Math.max(0, boxRect.left),
                     Math.max(0, boxRect.top),
@@ -542,13 +452,11 @@ public class MainActivity extends AppCompatActivity {
                     Math.min(bitmap.getHeight(), boxRect.bottom)
             );
 
-            // If the box is outside the bitmap, return a default color
             if (safeRect.width() <= 0 || safeRect.height() <= 0) {
                 Log.e(TAG, "Box is outside the bitmap boundaries");
                 return new ColorInfo("#000000", "Black", 0, 0, 0);
             }
 
-            // Extract only the part of the bitmap inside the box
             Bitmap boxBitmap = Bitmap.createBitmap(
                     bitmap,
                     safeRect.left,
@@ -565,7 +473,6 @@ public class MainActivity extends AppCompatActivity {
             long totalB = 0;
             int pixelCount = 0;
 
-            // Calculate the sum of all pixel values
             for (int y = 0; y < height; y++) {
                 for (int x = 0; x < width; x++) {
                     int pixel = boxBitmap.getPixel(x, y);
@@ -580,12 +487,10 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-            // If no valid pixels, return default color
             if (pixelCount == 0) {
                 return new ColorInfo("#000000", "Black", 0, 0, 0);
             }
 
-            // Calculate the average color
             int avgR = (int) (totalR / pixelCount);
             int avgG = (int) (totalG / pixelCount);
             int avgB = (int) (totalB / pixelCount);
@@ -615,14 +520,12 @@ public class MainActivity extends AppCompatActivity {
         int g = Color.green(color);
         int b = Color.blue(color);
 
-        // Calculate hue, saturation, and value
         float[] hsv = new float[3];
         Color.RGBToHSV(r, g, b, hsv);
         float hue = hsv[0];
         float saturation = hsv[1];
         float value = hsv[2];
 
-        // Check for grayscale colors first
         if (saturation < 0.15) {
             if (value < 0.15) return "Black (Negro)";
             if (value > 0.9) return "White (Blanco)";
@@ -721,7 +624,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "Permission request denied");
                 Toast.makeText(this, "Camera permission is required to use this app. Please enable it in settings.", Toast.LENGTH_LONG).show();
 
-                // If permission is permanently denied, guide the user to settings
                 if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
                     Log.d(TAG, "Permission permanently denied, showing instruction to enable in settings");
                     Toast.makeText(this, "Please enable camera permission in Settings -> Apps -> ColorScanner -> Permissions", Toast.LENGTH_LONG).show();
