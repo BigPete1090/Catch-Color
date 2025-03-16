@@ -41,10 +41,7 @@ public class ResourceAdapter extends RecyclerView.Adapter<ResourceAdapter.Resour
         holder.titleText.setText(item.getTitle());
         holder.descriptionText.setText(item.getDescription());
         holder.urlText.setText(item.getUrl());
-
-        // Remove or hide the image view
         holder.previewImage.setVisibility(View.GONE);
-
         holder.cardView.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onItemClick(item.getUrl());
@@ -56,14 +53,12 @@ public class ResourceAdapter extends RecyclerView.Adapter<ResourceAdapter.Resour
     public int getItemCount() {
         return resources.size();
     }
-
     static class ResourceViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
         TextView titleText;
         TextView descriptionText;
         TextView urlText;
         ImageView previewImage;
-
         ResourceViewHolder(View itemView) {
             super(itemView);
             cardView = itemView.findViewById(R.id.resource_card);
