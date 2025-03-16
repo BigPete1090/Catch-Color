@@ -529,75 +529,75 @@ public class MainActivity extends AppCompatActivity {
         if (saturation < 0.15) {
             if (value < 0.15) return "Black (Negro)";
             if (value > 0.9) return "White (Blanco)";
-            if (value < 0.3) return "Dark Gray";
-            if (value > 0.7) return "Light Gray";
-            return "Gray";
+            if (value < 0.3) return "Dark Gray (Gris Oscuro)";
+            if (value > 0.7) return "Light Gray (Gris Claro)";
+            return "Gray (Gris)";
         }
 
         // Determine color based on hue
         if (hue < 10 || hue >= 350) {
-            if (value < 0.5) return "Dark Red";
-            if (value > 0.8) return "Bright Red";
-            return "Red";
+            if (value < 0.5) return "Dark Red (Rojo Oscuro)";
+            if (value > 0.8) return "Bright Red (Rojo Claro)";
+            return "Red (Rojo)";
         }
 
         if (hue >= 10 && hue < 30) {
-            if (value < 0.6 && saturation > 0.4) return "Brown";
-            if (value > 0.8) return "Light Orange";
-            return "Orange";
+            if (value < 0.6 && saturation > 0.4) return "Brown (Marrón)";
+            if (value > 0.8) return "Light Orange (Naranja Clara)";
+            return "Orange (Naranja)";
         }
 
         if (hue >= 30 && hue < 45) {
-            if (value < 0.6 && saturation > 0.5) return "Brown";
-            return "Gold";
+            if (value < 0.6 && saturation > 0.5) return "Brown (Marrón)";
+            return "Gold (Oro)";
         }
 
         if (hue >= 45 && hue < 70) {
-            if (value < 0.7) return "Olive";
-            if (value > 0.9) return "Bright Yellow";
-            return "Yellow";
+            if (value < 0.7) return "Olive (aceituna)";
+            if (value > 0.9) return "Bright Yellow (Amarilla brillante)";
+            return "Yellow (Amarilla)";
         }
 
         if (hue >= 70 && hue < 150) {
-            if (value < 0.4) return "Dark Green";
-            if (saturation > 0.7 && value < 0.6) return "Forest Green";
-            if (value > 0.8 && saturation < 0.6) return "Lime Green";
-            if (hue < 100) return "Yellow-Green";
+            if (value < 0.4) return "Dark Green (Verde Oscuro)";
+            if (saturation > 0.7 && value < 0.6) return "Forest Green (Bosque Verde)";
+            if (value > 0.8 && saturation < 0.6) return "Lime Green (Verde lima)";
+            if (hue < 100) return "Yellow-Green (Amarillo-Verde)";
             if (hue > 120) return "Teal";
             return "Green";
         }
 
         if (hue >= 150 && hue < 200) {
-            if (value < 0.6) return "Deep Cyan";
-            if (value > 0.8) return "Light Cyan";
-            return "Cyan";
+            if (value < 0.6) return "Deep Cyan (Cian Intenso)";
+            if (value > 0.8) return "Light Cyan (Cian Claro)";
+            return "Cyan (Cian)";
         }
 
         if (hue >= 200 && hue < 240) {
-            if (value < 0.5) return "Navy Blue";
-            if (value > 0.8) return "Sky Blue";
-            return "Blue";
+            if (value < 0.5) return "Navy Blue (Azul marino)";
+            if (value > 0.8) return "Sky Blue (Azul cielo)";
+            return "Blue (Azul)";
         }
 
         if (hue >= 240 && hue < 280) {
-            if (value < 0.5) return "Deep Indigo";
-            if (hue < 260) return "Indigo";
-            return "Violet";
+            if (value < 0.5) return "Deep Indigo (indigo profundo)";
+            if (hue < 260) return "Indigo (Indigo)";
+            return "Violet (violeta)";
         }
 
         if (hue >= 280 && hue < 320) {
-            if (value < 0.4) return "Deep Purple";
-            if (value > 0.8) return "Light Purple";
-            return "Purple";
+            if (value < 0.4) return "Deep Purple (Púrpura profund)a";
+            if (value > 0.8) return "Light Purple (Púrpura claro)";
+            return "Purple (Púrpura)";
         }
 
         if (hue >= 320 && hue < 350) {
-            if (value < 0.5) return "Burgundy";
-            if (value > 0.8) return "Pink";
-            return "Magenta";
+            if (value < 0.5) return "Burgundy (Borgoña)";
+            if (value > 0.8) return "Pink (Rosa)";
+            return "Magenta (Magenta)";
         }
 
-        return "Unknown";
+        return "Unknown (desconocida)";
     }
 
     private boolean allPermissionsGranted() {
