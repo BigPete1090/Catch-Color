@@ -25,34 +25,24 @@ public class ResourcesActivity extends AppCompatActivity {
 
         ImageButton backButton = findViewById(R.id.back_button);
         resourcesRecyclerView = findViewById(R.id.resources_recycler_view);
-
-        // Set up back button
         backButton.setOnClickListener(v -> finish());
-
-        // Set up RecyclerView
         setupRecyclerView();
     }
 
     private void setupRecyclerView() {
-        // Create list of resource items
         List<ResourceItem> resources = new ArrayList<>();
-
-        // Add colorblind support resources
         resources.add(new ResourceItem(
                 "Colorblind Awareness",
                 "Information, resources and support for color vision deficiency",
                 "https://www.colourblindawareness.org"));
-
         resources.add(new ResourceItem(
                 "National Eye Institute",
                 "Information about color blindness causes, symptoms, and management",
                 "https://www.nei.nih.gov/learn-about-eye-health/eye-conditions-and-diseases/color-blindness"));
-
         resources.add(new ResourceItem(
                 "EnChroma",
                 "Color blind glasses and online color blindness tests",
                 "https://enchroma.com"));
-
         resources.add(new ResourceItem(
                 "Color Blind Essentials",
                 "Community forum and resources for colorblind individuals",
@@ -68,9 +58,7 @@ public class ResourcesActivity extends AppCompatActivity {
                 "Support and resources for people with vision impairments",
                 "https://www.afb.org"));
 
-        // Set up adapter
         resourceAdapter = new ResourceAdapter(resources, url -> {
-            // Open URL when item is clicked
             try {
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 startActivity(browserIntent);
@@ -80,8 +68,6 @@ public class ResourcesActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             }
         });
-
-        // Set layout manager and adapter
         resourcesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         resourcesRecyclerView.setAdapter(resourceAdapter);
     }
