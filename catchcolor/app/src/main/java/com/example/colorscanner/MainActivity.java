@@ -189,6 +189,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         zoomInButton.setOnClickListener(v -> {
+
             if (camera != null) {
                 float step = (getMaxZoomRatio() - 1.0f) / 10.0f;
                 updateZoom(Math.min(currentZoomRatio + step, getMaxZoomRatio()));
@@ -526,78 +527,99 @@ public class MainActivity extends AppCompatActivity {
         float saturation = hsv[1];
         float value = hsv[2];
 
+        // Improved grayscale detection
         if (saturation < 0.15) {
-            if (value < 0.15) return "Black (Negro)";
-            if (value > 0.9) return "White (Blanco)";
-            if (value < 0.3) return "Dark Gray (Gris Oscuro)";
-            if (value > 0.7) return "Light Gray (Gris Claro)";
-            return "Gray (Gris)";
+            if (value < 0.1) return "Black (Negro)";
+            if (value < 0.2) return "Very Dark Gray (Gris Muy Oscuro)";
+            if (value < 0.35) return "Dark Gray (Gris Oscuro)";
+            if (value < 0.65) return "Gray (Gris)";
+            if (value < 0.85) return "Light Gray (Gris Claro)";
+            if (value < 0.95) return "Very Light Gray (Gris Muy Claro)";
+            return "White (Blanco)";
         }
 
         // Determine color based on hue
         if (hue < 10 || hue >= 350) {
+            if (value < 0.3) return "Very Dark Red (Rojo Muy Oscuro)";
             if (value < 0.5) return "Dark Red (Rojo Oscuro)";
-            if (value > 0.8) return "Bright Red (Rojo Claro)";
+            if (value > 0.85) return "Bright Red (Rojo Brillante)";
             return "Red (Rojo)";
         }
 
+        // Improved brown-orange scale
         if (hue >= 10 && hue < 30) {
-            if (value < 0.6 && saturation > 0.4) return "Brown (Marrón)";
-            if (value > 0.8) return "Light Orange (Naranja Clara)";
+            if (value < 0.3) return "Deep Brown (Marrón Profundo)";
+            if (value < 0.5 && saturation > 0.4) return "Brown (Marrón)";
+            if (value < 0.6 && saturation > 0.6) return "Medium Brown (Marrón Medio)";
+            if (value < 0.7 && saturation > 0.7) return "Light Brown (Marrón Claro)";
+            if (value > 0.85) return "Light Orange (Naranja Clara)";
             return "Orange (Naranja)";
         }
 
+        // Better distinction between brown and gold
         if (hue >= 30 && hue < 45) {
-            if (value < 0.6 && saturation > 0.5) return "Brown (Marrón)";
-            return "Gold (Oro)";
+            if (value < 0.3) return "Deep Brown (Marrón Profundo)";
+            if (value < 0.5 && saturation > 0.5) return "Brown (Marrón)";
+            if (value < 0.6 && saturation > 0.6) return "Medium Brown (Marrón Medio)";
+            if (saturation > 0.7 && value > 0.7) return "Gold (Oro)";
+            if (value > 0.8) return "Light Gold (Oro Claro)";
+            return "Amber (Ámbar)";
         }
 
         if (hue >= 45 && hue < 70) {
-            if (value < 0.7) return "Olive (aceituna)";
-            if (value > 0.9) return "Bright Yellow (Amarilla brillante)";
-            return "Yellow (Amarilla)";
+            if (value < 0.3) return "Dark Olive (Oliva Oscura)";
+            if (value < 0.5) return "Olive (Oliva)";
+            if (value < 0.7) return "Mustard (Mostaza)";
+            if (value > 0.9) return "Bright Yellow (Amarillo Brillante)";
+            return "Yellow (Amarillo)";
         }
 
         if (hue >= 70 && hue < 150) {
-            if (value < 0.4) return "Dark Green (Verde Oscuro)";
-            if (saturation > 0.7 && value < 0.6) return "Forest Green (Bosque Verde)";
-            if (value > 0.8 && saturation < 0.6) return "Lime Green (Verde lima)";
+            if (value < 0.3) return "Deep Green (Verde Profundo)";
+            if (value < 0.5) return "Dark Green (Verde Oscuro)";
+            if (saturation > 0.7 && value < 0.6) return "Forest Green (Verde Bosque)";
+            if (value > 0.8 && saturation < 0.6) return "Lime Green (Verde Lima)";
             if (hue < 100) return "Yellow-Green (Amarillo-Verde)";
-            if (hue > 120) return "Teal";
-            return "Green";
+            if (hue > 120) return "Teal (Verde Azulado)";
+            return "Green (Verde)";
         }
 
         if (hue >= 150 && hue < 200) {
+            if (value < 0.3) return "Deep Teal (Verde Azulado Profundo)";
             if (value < 0.6) return "Deep Cyan (Cian Intenso)";
             if (value > 0.8) return "Light Cyan (Cian Claro)";
             return "Cyan (Cian)";
         }
 
         if (hue >= 200 && hue < 240) {
-            if (value < 0.5) return "Navy Blue (Azul marino)";
-            if (value > 0.8) return "Sky Blue (Azul cielo)";
+            if (value < 0.3) return "Deep Navy (Azul Marino Profundo)";
+            if (value < 0.5) return "Navy Blue (Azul Marino)";
+            if (value > 0.8) return "Sky Blue (Azul Cielo)";
             return "Blue (Azul)";
         }
 
         if (hue >= 240 && hue < 280) {
-            if (value < 0.5) return "Deep Indigo (indigo profundo)";
-            if (hue < 260) return "Indigo (Indigo)";
-            return "Violet (violeta)";
+            if (value < 0.3) return "Deep Indigo (Índigo Profundo)";
+            if (value < 0.5) return "Indigo (Índigo)";
+            if (hue < 260) return "Blue-Violet (Azul-Violeta)";
+            return "Violet (Violeta)";
         }
 
         if (hue >= 280 && hue < 320) {
-            if (value < 0.4) return "Deep Purple (Púrpura profund)a";
-            if (value > 0.8) return "Light Purple (Púrpura claro)";
-            return "Purple (Púrpura)";
+            if (value < 0.3) return "Deep Purple (Púrpura Profundo)";
+            if (value < 0.5) return "Purple (Púrpura)";
+            if (value > 0.8) return "Light Purple (Púrpura Claro)";
+            return "Medium Purple (Púrpura Medio)";
         }
 
         if (hue >= 320 && hue < 350) {
+            if (value < 0.3) return "Deep Burgundy (Borgoña Profundo)";
             if (value < 0.5) return "Burgundy (Borgoña)";
             if (value > 0.8) return "Pink (Rosa)";
             return "Magenta (Magenta)";
         }
 
-        return "Unknown (desconocida)";
+        return "Unknown (Desconocido)";
     }
 
     private boolean allPermissionsGranted() {
