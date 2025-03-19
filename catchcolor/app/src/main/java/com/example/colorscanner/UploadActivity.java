@@ -45,7 +45,6 @@ public class UploadActivity extends AppCompatActivity {
     private TextView colorNameText;
     private View colorPreview;
     private Button selectImageButton;
-    private Button analyzeButton;
     private Bitmap selectedBitmap;
 
     @Override
@@ -58,7 +57,6 @@ public class UploadActivity extends AppCompatActivity {
         colorNameText = findViewById(R.id.color_name);
         colorPreview = findViewById(R.id.color_preview);
         selectImageButton = findViewById(R.id.select_image_button);
-        analyzeButton = findViewById(R.id.analyze_button);
 
         if (allPermissionsGranted()) {
             Log.d(TAG, "All permissions already granted");
@@ -69,6 +67,7 @@ public class UploadActivity extends AppCompatActivity {
         }
         setupImageTouchListener();
     }
+
     private void setupImageTouchListener() {
         imagePreview.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_MOVE) {
@@ -103,14 +102,6 @@ public class UploadActivity extends AppCompatActivity {
 
     private void setupButtons() {
         selectImageButton.setOnClickListener(v -> pickImage());
-
-        analyzeButton.setOnClickListener(v -> {
-            if (selectedBitmap != null) {
-                analyzeImage(selectedBitmap);
-            } else {
-                Toast.makeText(this, "Please select an image first", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     private void pickImage() {
@@ -127,30 +118,11 @@ public class UploadActivity extends AppCompatActivity {
             try {
                 selectedBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
                 imagePreview.setImageBitmap(selectedBitmap);
-                analyzeButton.setVisibility(View.VISIBLE);
             } catch (IOException e) {
                 Log.e(TAG, "Error loading image: " + e.getMessage());
                 Toast.makeText(this, "Error loading image", Toast.LENGTH_SHORT).show();
             }
         }
-    }
-
-    private void analyzeImage(Bitmap bitmap) {
-        int width = bitmap.getWidth();
-        int height = bitmap.getHeight();
-
-        int boxWidth = (int)(width * 0.2);
-        int boxHeight = (int)(height * 0.2);
-
-        int left = (width - boxWidth) / 2;
-        int top = (height - boxHeight) / 2;
-
-        ColorInfo averageColor = extractAverageColorFromBox(bitmap,
-                left, top, left + boxWidth, top + boxHeight);
-
-        colorHexText.setText(averageColor.getHex());
-        colorNameText.setText(averageColor.getName());
-        colorPreview.setBackgroundColor(Color.parseColor(averageColor.getHex()));
     }
 
     private ColorInfo extractAverageColorFromBox(Bitmap bitmap, int left, int top, int right, int bottom) {

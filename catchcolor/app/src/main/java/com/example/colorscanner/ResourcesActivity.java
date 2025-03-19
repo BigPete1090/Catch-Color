@@ -58,9 +58,9 @@ public class ResourcesActivity extends AppCompatActivity {
                 "Support and resources for people with vision impairments",
                 "https://www.afb.org"));
         resources.add(new ResourceItem(
-                "Arjun Interview",
+                "Arjun Review",
                 "Catch-Color Review",
-                "https://docs.google.com/document/d/1-htOUGDKv-47FcztYNEkZgbvqm-ZM0vJPkaTGBOX-B4/edit?usp=sharing"));
+                "https://sites.google.com/view/colorcatch/"));
 
         resourceAdapter = new ResourceAdapter(resources, url -> {
             try {
