@@ -1,5 +1,4 @@
 package com.example.colorscanner;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -16,15 +15,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.view.MotionEvent;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
 import java.io.IOException;
-
 public class UploadActivity extends AppCompatActivity {
     private static final String TAG = "UploadActivity";
     private static final int REQUEST_CODE_PERMISSIONS = 20;
@@ -39,19 +35,16 @@ public class UploadActivity extends AppCompatActivity {
             REQUIRED_PERMISSIONS = new String[]{Manifest.permission.READ_EXTERNAL_STORAGE};
         }
     }
-
     private ImageView imagePreview;
     private TextView colorHexText;
     private TextView colorNameText;
     private View colorPreview;
     private Button selectImageButton;
     private Bitmap selectedBitmap;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload);
-
         imagePreview = findViewById(R.id.image_preview);
         colorHexText = findViewById(R.id.color_hex);
         colorNameText = findViewById(R.id.color_name);
